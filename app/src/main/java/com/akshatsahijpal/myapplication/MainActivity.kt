@@ -18,22 +18,17 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-           LazyColumn{
-               itemsIndexed(listOf("a", "b", "c")){ index, item -> }
-               items(400){
-                   Text(text = "for $it")
-               }
-           }
+
         }
     }
 }
 @Preview
 @Composable
 fun prev() {
-    var scrollState = rememberScrollState()
-    Column(modifier = Modifier.verticalScroll(state = scrollState)){
-        for (i in 1..20){
-            Text(text = "$i")
+    LazyColumn{
+        itemsIndexed(listOf("a", "b", "c")){ index, item -> }
+        items(400){
+            Text(text = "for $it")
         }
     }
 }
