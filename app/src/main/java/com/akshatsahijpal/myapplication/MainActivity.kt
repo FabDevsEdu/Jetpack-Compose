@@ -21,6 +21,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +31,7 @@ class MainActivity : ComponentActivity() {
             var textFState by remember {
                 mutableStateOf("")
             }
+            val scope = rememberCoroutineScope()
             Scaffold(modifier = Modifier.fillMaxSize(), scaffoldState = scaffoldState) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center,
@@ -37,9 +39,15 @@ class MainActivity : ComponentActivity() {
                         .fillMaxSize()
                         .padding(10.dp)) {
                     TextField(value = textFState, onValueChange = {
+                        textFState = it
                     }, label = {
-
-                    })
+                    }, singleLine = true, modifier = Modifier.fillMaxWidth())
+                    Spacer(modifier = Modifier.height(20.dp))
+                    Button(onClick = {
+                        scope.launch { scaffoldState.snackbarHostState.showSnackbar("$textFState") }
+                    }) {
+                        Text(text = "Add")
+                    }
                 }
             }
         }
