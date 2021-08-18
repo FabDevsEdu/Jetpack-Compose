@@ -1,4 +1,4 @@
-package com.akshatsahijpal.myapplication.ui.theme
+ package com.akshatsahijpal.myapplication.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
